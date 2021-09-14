@@ -11,6 +11,9 @@ jobs:
         node-version: [12.x]
     steps:
       - uses: actions/checkout@v1
+      
+      - name: Jest coverage report
+        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.4
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -28,3 +31,4 @@ jobs:
 
       - name: Build
         run: yarn build
+        
