@@ -6,13 +6,14 @@ import { compose } from 'redux';
 import get from 'lodash/get';
 import debounce from 'lodash/debounce';
 import isEmpty from 'lodash/isEmpty';
-import { Card, Input } from 'antd';
+import { Card, Skeleton, Input } from 'antd';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
 import T from '@components/T';
-import Clickable from '@app/components/Clickable/index';
+import For from '@app/components/For/index';
+import * as colors from '@app/themes/colors';
+import TrackCard from '@app/components/TrackCard/index';
 import { injectSaga } from 'redux-injectors';
-import { useHistory } from 'react-router';
 import { selectItunesContainer, selectItunesData, selectItunesError, selectItunesName } from './selectors';
 import { itunesContainerCreators } from './reducer';
 import itunesContainerSaga from './saga';
@@ -22,7 +23,7 @@ const { Search } = Input;
 const CustomCard = styled(Card)`
   && {
     margin: 20px 0;
-    max-width: ${(props) => props.maxwidth}px;
+    max-width: ${(props) => props.width};
     color: ${(props) => props.color};
     ${(props) => props.color && `color: ${props.color}`};
   }
@@ -37,10 +38,29 @@ const Container = styled.div`
     padding: ${(props) => props.padding}px;
   }
 `;
-const RightContent = styled.div`
-  display: flex;
-  align-self: flex-end;
+const CustomisedT = styled(T)`
+  && {
+    color: ${colors.textColor};
+  }
 `;
+
+const BottomContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: ${(props) => props.maxwidth}px;
+  width: 90%;
+  margin: 10px auto;
+  padding: 5px 50px;
+  background-color: ${colors.mainColor};
+  border-radius: 10px;
+`;
+const MusicGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  grid-column-gap: 15;
+  grid-row-gap: 5px;
+`;
+
 export function ItunesContainer({
   dispatchArtistData,
   dispatchClearArtistData,
@@ -49,7 +69,8 @@ export function ItunesContainer({
   itunesError,
   artistName,
   maxwidth,
-  padding
+  padding,
+  trackWidth
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -67,37 +88,76 @@ export function ItunesContainer({
     }
   }, []);
 
-  const history = useHistory();
-
-  const handleOnChange = (artistName) => {
-    if (!isEmpty(artistName)) {
-      dispatchArtistData(artistName);
+  const handleOnChange = (aName) => {
+    if (!isEmpty(aName)) {
+      dispatchArtistData(aName);
       setLoading(true);
     } else {
       dispatchClearArtistData();
     }
   };
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
-  const refreshPage = () => {
-    history.push('stories');
-    window.location.reload();
+  const renderTrack = () => {
+    const items = get(itunesData, 'results', []);
+    const resultCount = get(itunesData, 'resultCount', 0);
+    return (
+      (items.length !== 0 || loading) && (
+        <Skeleton loading={loading} active>
+          {artistName && (
+            <div>
+              <CustomisedT id="search_query" values={{ artistName }} />
+            </div>
+          )}
+          {resultCount !== 0 && (
+            <div>
+              <CustomisedT id="matching_tracks" values={{ resultCount }} />
+            </div>
+          )}
+          <For
+            of={items}
+            ParentComponent={MusicGrid}
+            renderItem={(item, index) => <TrackCard item={item} key={index} />}
+          />
+        </Skeleton>
+      )
+    );
   };
+  const renderErrorState = () => {
+    let trackError;
+    if (itunesError) {
+      trackError = itunesError;
+    } else if (!get(itunesData, 'resultCount', 0)) {
+      trackError = 'artist_search_default';
+    }
+    return (
+      !loading &&
+      trackError && (
+        <CustomCard color={itunesError ? 'red' : 'grey'} title={intl.formatMessage({ id: 'Itunes_list' })}>
+          <T id={trackError} />
+        </CustomCard>
+      )
+    );
+  };
+
   return (
-    <Container>
-      <RightContent>
-        <Clickable textId="stories" onClick={refreshPage} />
-      </RightContent>
-      <CustomCard>
-        <T marginBottom={10} id="artist_search" />
-        <Search
-          data-testid="search-bar"
-          defaultValue={artistName}
-          type="text"
-          onChange={(evt) => debouncedHandleOnChange(evt.target.value)}
-          onSearch={(searchText) => debouncedHandleOnChange(searchText)}
-        />
-      </CustomCard>
-    </Container>
+    <>
+      <Container padding={padding} maxwidth={maxwidth}>
+        <CustomCard maxwidth={maxwidth}>
+          <T marginBottom={10} id="artist_search" />
+          <Search
+            data-testid="search-bar"
+            defaultValue={artistName}
+            type="text"
+            onChange={(evt) => debouncedHandleOnChange(evt.target.value)}
+            onSearch={(searchText) => debouncedHandleOnChange(searchText)}
+          />
+        </CustomCard>
+      </Container>
+      <BottomContainer maxWidth={trackWidth}>
+        {renderTrack()}
+        {renderErrorState}
+      </BottomContainer>
+    </>
   );
 }
 
@@ -113,12 +173,14 @@ ItunesContainer.propTypes = {
   artistName: PropTypes.string,
   history: PropTypes.object,
   maxwidth: PropTypes.number,
-  padding: PropTypes.number
+  padding: PropTypes.number,
+  trackWidth: PropTypes.number
 };
 
 ItunesContainer.defaultProps = {
   maxwidth: 500,
   padding: 20,
+  trackWidth: 1000,
   itunesData: {},
   itunesError: null
 };
