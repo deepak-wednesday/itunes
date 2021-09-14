@@ -66,7 +66,36 @@ exports[`<ItunesContainer /> container tests should render and match the snapsho
     </div>
     <div
       class="ItunesContainer__BottomContainer-rg528l-3 dgISiI"
-    />
+    >
+      <div
+        class="ant-card ant-card-bordered ItunesContainer__CustomCard-rg528l-0 eNoxnl"
+        color="grey"
+      >
+        <div
+          class="ant-card-head"
+        >
+          <div
+            class="ant-card-head-wrapper"
+          >
+            <div
+              class="ant-card-head-title"
+            >
+              Itunes List
+            </div>
+          </div>
+        </div>
+        <div
+          class="ant-card-body"
+        >
+          <p
+            class="T__StyledText-gjlic1-0 kYcyRq"
+            data-testid="t"
+          >
+            Search for a songs by entering it's artist name in the search box
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 `;

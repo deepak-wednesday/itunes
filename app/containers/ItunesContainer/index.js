@@ -155,7 +155,7 @@ export function ItunesContainer({
       </Container>
       <BottomContainer maxWidth={trackWidth}>
         {renderTrack()}
-        {renderErrorState}
+        {renderErrorState()}
       </BottomContainer>
     </>
   );
