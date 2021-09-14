@@ -7,21 +7,6 @@ exports[`<ItunesContainer /> container tests should render and match the snapsho
       class="ItunesContainer__Container-rg528l-1 bLmJaV"
     >
       <div
-        class="ItunesContainer__RightContent-rg528l-2 hdRXfz"
-      >
-        <div
-          class="Clickable__StyledClickable-sc-19lp5om-0 grlVIv"
-          data-testid="clickable"
-        >
-          <p
-            class="T__StyledText-gjlic1-0 kYcyRq"
-            data-testid="t"
-          >
-            Go to Storybook
-          </p>
-        </div>
-      </div>
-      <div
         class="ant-card ant-card-bordered ItunesContainer__CustomCard-rg528l-0 iCeOuG"
       >
         <div

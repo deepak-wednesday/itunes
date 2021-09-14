@@ -10,9 +10,7 @@ import { Card, Input } from 'antd';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
 import T from '@components/T';
-import Clickable from '@app/components/Clickable/index';
 import { injectSaga } from 'redux-injectors';
-import { useHistory } from 'react-router';
 import { selectItunesContainer, selectItunesData, selectItunesError, selectItunesName } from './selectors';
 import { itunesContainerCreators } from './reducer';
 import itunesContainerSaga from './saga';
@@ -36,10 +34,6 @@ const Container = styled.div`
     margin: 0 auto;
     padding: ${(props) => props.padding}px;
   }
-`;
-const RightContent = styled.div`
-  display: flex;
-  align-self: flex-end;
 `;
 export function ItunesContainer({
   dispatchArtistData,
@@ -67,8 +61,6 @@ export function ItunesContainer({
     }
   }, []);
 
-  const history = useHistory();
-
   const handleOnChange = (artistName) => {
     if (!isEmpty(artistName)) {
       dispatchArtistData(artistName);
@@ -78,15 +70,8 @@ export function ItunesContainer({
     }
   };
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
-  const refreshPage = () => {
-    history.push('stories');
-    window.location.reload();
-  };
   return (
     <Container>
-      <RightContent>
-        <Clickable textId="stories" onClick={refreshPage} />
-      </RightContent>
       <CustomCard>
         <T marginBottom={10} id="artist_search" />
         <Search
