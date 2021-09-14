@@ -73,6 +73,11 @@ export function ItunesContainer({
   trackWidth
 }) {
   const [loading, setLoading] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [tuneId, setTuneId] = useState(null);
+  const [audio, setAudio] = useState(null);
+  const [current, setCurrent] = useState(0);
+  const [trackUrl, setTrackUrl] = useState(null);
 
   useEffect(() => {
     const loaded = get(itunesData, 'results', null) || itunesError;
@@ -97,6 +102,25 @@ export function ItunesContainer({
     }
   };
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
+
+  const playSong = (url, trackId) => {
+    setIsPlaying(true);
+    setTuneId(trackId);
+    audio?.pause();
+    const currentAudio = new Audio(url);
+    setAudio(currentAudio);
+    if (current && url === trackUrl) {
+      currentAudio.currentTime = current;
+    }
+    setTrackUrl(url);
+    currentAudio.play();
+  };
+
+  const pauseSong = (url) => {
+    setIsPlaying(false);
+    audio?.pause();
+    setCurrent(audio?.currentTime);
+  };
   const renderTrack = () => {
     const items = get(itunesData, 'results', []);
     const resultCount = get(itunesData, 'resultCount', 0);
@@ -116,7 +140,17 @@ export function ItunesContainer({
           <For
             of={items}
             ParentComponent={MusicGrid}
-            renderItem={(item, index) => <TrackCard item={item} key={index} />}
+            renderItem={(item, index) => (
+              <TrackCard
+                item={item}
+                key={index}
+                currentPlayingId={tuneId}
+                currentTrack={audio}
+                isPlaying={isPlaying}
+                onPlay={playSong}
+                onPause={pauseSong}
+              />
+            )}
           />
         </Skeleton>
       )
