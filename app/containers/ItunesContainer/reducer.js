@@ -5,7 +5,6 @@
  */
 import produce from 'immer';
 import { createActions } from 'reduxsauce';
-import get from 'lodash/get';
 
 export const initialState = { artistName: null, itunesData: [], itunesError: null };
 
@@ -29,7 +28,7 @@ export const itunesContainerReducer = (state = initialState, action) =>
         draft.itunesData = action.data;
         break;
       case itunesContainerTypes.FAILURE_GET_ARTIST:
-        draft.itunesError = get(action.error, 'message', 'something_went_wrong');
+        draft.itunesError = action.error;
         break;
       default:
         return state;

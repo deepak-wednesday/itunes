@@ -5,14 +5,19 @@
 /* eslint-disable redux-saga/yield-effects */
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { getArtists } from '@app/services/itunesApi';
+import customIntl from '@utils/customIntl';
 import { apiResponseGenerator } from '@app/utils/testUtils';
 import itunesContainerSaga, { getItunesData } from '../saga';
 import { itunesContainerTypes } from '../reducer';
+import { translate, setIntl } from '@app/components/IntlGlobalProvider/index';
 
 describe('ItunesContainer saga tests', () => {
   const generator = itunesContainerSaga();
   const artistName = 'dp';
   let getItunesDataGenerator = getItunesData({ artistName });
+  beforeAll(() => {
+    setIntl(customIntl());
+  });
 
   it('should start task to watch for REQUEST_GET_ARTIST action', () => {
     expect(generator.next().value).toEqual(takeLatest(itunesContainerTypes.REQUEST_GET_ARTIST, getItunesData));
@@ -21,7 +26,7 @@ describe('ItunesContainer saga tests', () => {
   it('should ensure that the action FAILURE_GET_ARTIST is dispatched when the api call fails', () => {
     const response = getItunesDataGenerator.next().value;
     expect(response).toEqual(call(getArtists, artistName));
-    const errorRes = { errorMessage: 'something went wrong!' };
+    const errorRes = translate('something_went_wrong');
     expect(getItunesDataGenerator.next(apiResponseGenerator(false, errorRes)).value).toEqual(
       put({
         type: itunesContainerTypes.FAILURE_GET_ARTIST,

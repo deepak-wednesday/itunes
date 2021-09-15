@@ -9,7 +9,9 @@ export function IntlGlobalProvider({ children }) {
   intl = useIntl(); // Keep the 'intl' service reference
   return children;
 }
-
+export const setIntl = (value) => {
+  intl = value;
+};
 // Getter function to expose the read-only 'intl' service
 export function appIntl() {
   return intl;
