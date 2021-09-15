@@ -11,7 +11,8 @@ exports[`<TrackCard /> should render and match the snapshot 1`] = `
         class="ant-card-cover"
       >
         <img
-          class="TrackCard__Image-sc-10bk196-2 hGDzdO"
+          alt="artwork"
+          class="TrackCard__Image-sc-10bk196-2 eYfBCI"
           src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/100x100bb.jpg"
         />
       </div>

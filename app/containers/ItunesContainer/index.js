@@ -10,9 +10,10 @@ import { Card, Skeleton, Input } from 'antd';
 import styled from 'styled-components';
 import { injectIntl } from 'react-intl';
 import T from '@components/T';
-import For from '@app/components/For/index';
+import For from '@app/components/For';
+import If from '@app/components/If';
 import * as colors from '@app/themes/colors';
-import TrackCard from '@app/components/TrackCard/index';
+import TrackCard from '@app/components/TrackCard';
 import { injectSaga } from 'redux-injectors';
 import { selectItunesContainer, selectItunesData, selectItunesError, selectItunesName } from './selectors';
 import { itunesContainerCreators } from './reducer';
@@ -56,7 +57,7 @@ const BottomContainer = styled.div`
 `;
 const MusicGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 2fr);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 2fr));
   grid-column-gap: 15;
   grid-row-gap: 5px;
 `;
@@ -116,7 +117,7 @@ export function ItunesContainer({
     currentAudio.play();
   };
 
-  const pauseSong = (url) => {
+  const pauseSong = () => {
     setIsPlaying(false);
     audio?.pause();
     setCurrent(audio?.currentTime);
@@ -126,22 +127,24 @@ export function ItunesContainer({
     const resultCount = get(itunesData, 'resultCount', 0);
     return (
       (items.length !== 0 || loading) && (
-        <Skeleton loading={loading} active>
-          {artistName && (
+        <Skeleton datat-testid="skeleton" loading={loading} active>
+          <If condition={artistName}>
             <div>
               <CustomisedT id="search_query" values={{ artistName }} />
             </div>
-          )}
-          {resultCount !== 0 && (
+          </If>
+          <If condition={resultCount !== 0}>
             <div>
               <CustomisedT id="matching_tracks" values={{ resultCount }} />
             </div>
-          )}
+          </If>
           <For
+            data-testid="music-grid"
             of={items}
             ParentComponent={MusicGrid}
             renderItem={(item, index) => (
               <TrackCard
+                data-testid="track-card"
                 item={item}
                 key={index}
                 currentPlayingId={tuneId}

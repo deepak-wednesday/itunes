@@ -10,7 +10,7 @@ const text = '#212529';
 const secondary = '#f8c49c';
 const success = '#28a745';
 const error = '#dc3545';
-const TrackCardBColor = '#F3F4F6';
+const TrackCardColor = '#F3F4F6';
 const main = '#4B5563';
 const textColor = '#374151';
 const mainColor = '#FEF3C7';
@@ -22,7 +22,7 @@ const colors = {
   secondary,
   success,
   error,
-  TrackCardBColor,
+  TrackCardColor,
   main,
   textColor,
   mainColor,
