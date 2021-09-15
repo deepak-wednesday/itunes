@@ -21,6 +21,7 @@ exports[`<TrackCard /> should render and match the snapshot 1`] = `
       >
         <div
           class="ant-card-meta TrackCard__TextCard-sc-10bk196-1 gIIcut"
+          data-testid="text-card"
         >
           <div
             class="ant-card-meta-detail"
@@ -43,6 +44,7 @@ exports[`<TrackCard /> should render and match the snapshot 1`] = `
           <span
             aria-label="play-circle"
             class="anticon anticon-play-circle TrackCard__CustomPlay-sc-10bk196-4 kcqcyj"
+            data-testid="play-button"
             role="img"
             tabindex="-1"
           >

@@ -19,7 +19,7 @@ const CustomCard = styled(Card)`
     width: 18em;
     margin: 1rem 0;
     height: ${(props) => (props.height ? props.height : 30)}em;
-    background-color: ${colors.TrackCardColor};
+    background-color: ${colors.trackCardColor};
   }
 `;
 const TextCard = styled(Meta)`
@@ -56,13 +56,13 @@ export function TrackCard({ item, currentPlayingId, isPlaying, onPlay, onPause }
   const { artworkUrl100, trackName, artistName, previewUrl, trackId } = item;
   return (
     <CustomCard data-testid="track-card" cover={<Image alt="artwork" src={artworkUrl100} />}>
-      <TextCard title={trackName} description={artistName} />
+      <TextCard data-testid="text-card" title={trackName} description={artistName} />
       <CustomButton>
         <If condition={isPlaying && item.trackId === currentPlayingId}>
-          <CustomPause onClick={() => onPause(previewUrl, trackId)} />
+          <CustomPause data-testid="pause-button" onClick={() => onPause(previewUrl, trackId)} />
         </If>
         <If condition={!(isPlaying && item.trackId === currentPlayingId)}>
-          <CustomPlay onClick={() => onPlay(previewUrl, trackId)} />
+          <CustomPlay data-testid="play-button" onClick={() => onPlay(previewUrl, trackId)} />
         </If>
         <CustomRight />
       </CustomButton>
