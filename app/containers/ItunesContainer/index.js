@@ -148,7 +148,6 @@ export function ItunesContainer({
                 item={item}
                 key={index}
                 currentPlayingId={tuneId}
-                currentTrack={audio}
                 isPlaying={isPlaying}
                 onPlay={playSong}
                 onPause={pauseSong}
