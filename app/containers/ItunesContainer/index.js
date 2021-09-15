@@ -48,7 +48,6 @@ const CustomisedT = styled(T)`
 const BottomContainer = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: ${(props) => props.maxwidth}px;
   width: 90%;
   margin: 10px auto;
   padding: 5px 50px;
@@ -189,7 +188,7 @@ export function ItunesContainer({
           />
         </CustomCard>
       </Container>
-      <BottomContainer maxWidth={trackWidth}>
+      <BottomContainer>
         {renderTrack()}
         {renderErrorState()}
       </BottomContainer>
@@ -216,7 +215,6 @@ ItunesContainer.propTypes = {
 ItunesContainer.defaultProps = {
   maxwidth: 500,
   padding: 20,
-  trackWidth: 1000,
   itunesData: {},
   itunesError: null
 };

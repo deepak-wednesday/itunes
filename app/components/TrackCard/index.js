@@ -71,13 +71,18 @@ export function TrackCard({ item, currentPlayingId, isPlaying, onPlay, onPause }
 }
 
 TrackCard.propTypes = {
+  item: PropTypes.shape({
+    trackId: PropTypes.number,
+    artworkUrl100: PropTypes.string,
+    trackName: PropTypes.string,
+    artistName: PropTypes.string,
+    previewUrl: PropTypes.string
+  }),
   height: PropTypes.number,
-  item: PropTypes.object,
   onPause: PropTypes.func,
   onPlay: PropTypes.func,
   currentPlayingId: PropTypes.number,
-  isPlaying: PropTypes,
-  trackId: PropTypes.number
+  isPlaying: PropTypes
 };
 
 export default TrackCard;
