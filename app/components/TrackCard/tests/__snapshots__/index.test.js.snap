@@ -8,42 +8,50 @@ exports[`<TrackCard /> should render and match the snapshot 1`] = `
       data-testid="track-card"
     >
       <div
-        class="ant-card-cover"
-      >
-        <img
-          alt="artwork"
-          class="TrackCard__Image-sc-10bk196-2 eYfBCI"
-          src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/100x100bb.jpg"
-        />
-      </div>
-      <div
         class="ant-card-body"
       >
-        <div
-          class="ant-card-meta TrackCard__TextCard-sc-10bk196-1 gIIcut"
-          data-testid="text-card"
+        <a
+          href="/track/1469577741"
         >
           <div
-            class="ant-card-meta-detail"
+            class="ant-card ant-card-bordered TrackCard__ImageCard-sc-10bk196-1 jvaOyH"
           >
             <div
-              class="ant-card-meta-title"
+              class="ant-card-body"
             >
-              Upside Down
-            </div>
-            <div
-              class="ant-card-meta-description"
-            >
-              Jack Johnson
+              <img
+                alt="artwork"
+                class="TrackCard__Image-sc-10bk196-3 ioNbZe"
+                src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/100x100bb.jpg"
+              />
+              <div
+                class="ant-card-meta TrackCard__TextCard-sc-10bk196-2 cIXUut"
+                data-testid="text-card"
+              >
+                <div
+                  class="ant-card-meta-detail"
+                >
+                  <div
+                    class="ant-card-meta-title"
+                  >
+                    Upside Down
+                  </div>
+                  <div
+                    class="ant-card-meta-description"
+                  >
+                    Jack Johnson
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </a>
         <div
-          class="TrackCard__CustomButton-sc-10bk196-6 jPMkFu"
+          class="TrackCard__CustomButton-sc-10bk196-7 cOpOKr"
         >
           <span
             aria-label="play-circle"
-            class="anticon anticon-play-circle TrackCard__CustomPlay-sc-10bk196-4 kcqcyj"
+            class="anticon anticon-play-circle TrackCard__CustomPlay-sc-10bk196-5 jxbcWi"
             data-testid="play-button"
             role="img"
             tabindex="-1"
@@ -73,7 +81,7 @@ exports[`<TrackCard /> should render and match the snapshot 1`] = `
           </span>
           <span
             aria-label="right-circle"
-            class="anticon anticon-right-circle TrackCard__CustomRight-sc-10bk196-5 jWmgZW"
+            class="anticon anticon-right-circle TrackCard__CustomRight-sc-10bk196-6 iTvnfB"
             role="img"
           >
             <svg

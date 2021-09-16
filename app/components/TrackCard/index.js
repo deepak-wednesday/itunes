@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Card } from 'antd';
 import { PlayCircleTwoTone, RightCircleTwoTone, PauseCircleTwoTone } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import * as colors from '@app/themes/colors';
 import If from '@components/If';
 
@@ -22,13 +23,23 @@ const CustomCard = styled(Card)`
     background-color: ${colors.trackCardColor};
   }
 `;
+const ImageCard = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 15em;
+  height: ${(props) => (props.height ? props.height : 24)}em;
+`;
 const TextCard = styled(Meta)`
   && {
-    margin: 0.2rem !important;
+    margin: 0.3rem !important;
+    width: 15em;
+    padding: 1em;
   }
 `;
 const Image = styled.img`
-  width: 250px;
+  width: 15em;
   height: ${(props) => (props.height ? props.height : 18)}em;
 `;
 const CustomPause = styled(PauseCircleTwoTone)`
@@ -53,13 +64,18 @@ const CustomButton = styled.div`
 `;
 
 export function TrackCard({ item, currentPlayingId, isPlaying, onPlay, onPause }) {
-  const { artworkUrl100, trackName, artistName, previewUrl, trackId } = item;
+  const { trackName, artistName, artworkUrl100, previewUrl, trackId } = item;
   return (
-    <CustomCard data-testid="track-card" cover={<Image alt="artwork" src={artworkUrl100} />}>
-      <TextCard data-testid="text-card" title={trackName} description={artistName} />
+    <CustomCard data-testid="track-card">
+      <Link to={`/track/${trackId}`}>
+        <ImageCard>
+          <Image alt="artwork" src={artworkUrl100} />
+          <TextCard data-testid="text-card" title={trackName} description={artistName} />
+        </ImageCard>
+      </Link>
       <CustomButton>
         <If condition={isPlaying && item.trackId === currentPlayingId}>
-          <CustomPause data-testid="pause-button" onClick={() => onPause(previewUrl, trackId)} />
+          <CustomPause data-testid="pause-button" onClick={() => onPause(previewUrl)} />
         </If>
         <If condition={!(isPlaying && item.trackId === currentPlayingId)}>
           <CustomPlay data-testid="play-button" onClick={() => onPlay(previewUrl, trackId)} />
@@ -76,7 +92,7 @@ TrackCard.propTypes = {
   onPause: PropTypes.func,
   onPlay: PropTypes.func,
   currentPlayingId: PropTypes.number,
-  isPlaying: PropTypes,
+  isPlaying: PropTypes.bool,
   trackId: PropTypes.number
 };
 

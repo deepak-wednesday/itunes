@@ -6,12 +6,23 @@
 import produce from 'immer';
 import { createActions } from 'reduxsauce';
 
-export const initialState = { artistName: null, itunesData: [], itunesError: null };
+export const initialState = {
+  artistName: null,
+  itunesData: {},
+  itunesError: null,
+  trackId: null,
+  trackDetails: {},
+  trackError: null
+};
 
 export const { Types: itunesContainerTypes, Creators: itunesContainerCreators } = createActions({
   requestGetArtist: ['artistName'],
   successGetArtist: ['data'],
   failureGetArtist: ['error'],
+  requestGetTrackDetails: ['trackId'],
+  successGetTrackDetails: ['trackDetails'],
+  failureGetTrackDetails: ['error'],
+  clearTrackDetails: [],
   clearArtist: []
 });
 
@@ -30,8 +41,18 @@ export const itunesContainerReducer = (state = initialState, action) =>
       case itunesContainerTypes.FAILURE_GET_ARTIST:
         draft.itunesError = action.error;
         break;
-      default:
-        return state;
+      case itunesContainerTypes.REQUEST_GET_TRACK_DETAILS:
+        draft.trackId = action.trackId;
+        break;
+      case itunesContainerTypes.SUCCESS_GET_TRACK_DETAILS:
+        draft.trackDetails = action.trackDetails;
+        break;
+      case itunesContainerTypes.FAILURE_GET_TRACK_DETAILS:
+        draft.trackDetails = {};
+        draft.trackError = action.trackError;
+        break;
+      case itunesContainerTypes.CLEAR_TRACK_DETAILS:
+        return initialState;
     }
   });
 
