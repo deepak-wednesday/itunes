@@ -147,7 +147,6 @@ export function ItunesContainer({
                 item={item}
                 key={index}
                 currentPlayingId={tuneId}
-                currentTrack={audio}
                 isPlaying={isPlaying}
                 onPlay={playSong}
                 onPause={pauseSong}
@@ -216,7 +215,6 @@ ItunesContainer.propTypes = {
 ItunesContainer.defaultProps = {
   maxwidth: 500,
   padding: 20,
-  trackWidth: 1000,
   itunesData: {},
   itunesError: null
 };
