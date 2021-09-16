@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { timeout, renderProvider } from '@utils/testUtils';
+import { timeout, renderProvider, renderWithIntl } from '@utils/testUtils';
 import { fireEvent } from '@testing-library/dom';
 import { ItunesContainerTest as ItunesContainer } from '../index';
 
@@ -44,6 +44,12 @@ describe('<ItunesContainer /> container tests', () => {
     fireEvent.change(getByTestId('search-bar'), {
       target: { value: 'bella ciao' }
     });
+    await timeout(500);
+    expect(submitSpy).toBeCalled();
+  });
+  it('should call dispatchArtistData on loading state , if artistName is present', async () => {
+    const artistName = 'deepak';
+    renderWithIntl(<ItunesContainer artistName={artistName} dispatchArtistData={submitSpy} />);
     await timeout(500);
     expect(submitSpy).toBeCalled();
   });
