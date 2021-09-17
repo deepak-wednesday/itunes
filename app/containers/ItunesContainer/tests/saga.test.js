@@ -4,17 +4,20 @@
 
 /* eslint-disable redux-saga/yield-effects */
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { getArtists } from '@app/services/itunesApi';
+import { getArtists, getTrackDetails } from '@app/services/itunesApi';
 import customIntl from '@utils/customIntl';
 import { apiResponseGenerator } from '@app/utils/testUtils';
-import itunesContainerSaga, { getItunesData } from '../saga';
+import itunesContainerSaga, { getItunesData, getTrackData, trackDetailsSaga } from '../saga';
 import { itunesContainerTypes } from '../reducer';
 import { translate, setIntl } from '@app/components/IntlGlobalProvider/index';
 
 describe('ItunesContainer saga tests', () => {
   const generator = itunesContainerSaga();
+  const trackGenerator = trackDetailsSaga();
   const artistName = 'dp';
+  const trackId = '12345';
   let getItunesDataGenerator = getItunesData({ artistName });
+  let getTrackDetailsGenerator = getTrackData({ trackId });
   beforeAll(() => {
     setIntl(customIntl());
   });
@@ -46,6 +49,26 @@ describe('ItunesContainer saga tests', () => {
       put({
         type: itunesContainerTypes.SUCCESS_GET_ARTIST,
         data: itunesResponse
+      })
+    );
+  });
+
+  it('should start task to watch for REQUEST_GET_TRACK_DETAILS action', () => {
+    expect(trackGenerator.next().value).toEqual(
+      takeLatest(itunesContainerTypes.REQUEST_GET_TRACK_DETAILS, getTrackData)
+    );
+  });
+
+  it('should ensure that the action FAILURE_GET_TRACK_DETAILS is dispatched when the api call fails', () => {
+    getTrackDetailsGenerator = getTrackData({ trackId });
+    getTrackDetailsGenerator.next().value;
+    const response = getTrackDetailsGenerator.next().value;
+    expect(response).toEqual(call(getTrackDetails, trackId));
+    const errorRes = translate('something_went_wrong');
+    expect(getTrackDetailsGenerator.next(apiResponseGenerator(false, errorRes)).value).toEqual(
+      put({
+        type: itunesContainerTypes.FAILURE_GET_TRACK_DETAILS,
+        error: errorRes
       })
     );
   });
