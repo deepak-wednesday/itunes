@@ -15,12 +15,12 @@ import { compose } from 'redux';
 import { injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 import { Skeleton } from 'antd';
+import TrackCard from '@components/TrackCard';
+import If from '@components/If';
+import { T } from '@components/T';
 import { itunesContainerCreators } from '../reducer';
 import { selectItunesContainer, selectTrackData, selectTrackError } from '../selectors';
 import { trackDetailsSaga } from '../saga';
-import TrackCard from '@app/components/TrackCard';
-import If from '@app/components/If';
-import { T } from '@app/components/T';
 
 const Container = styled.div`
   display: flex;

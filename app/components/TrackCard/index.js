@@ -57,32 +57,25 @@ const CustomRight = styled(RightCircleTwoTone)`
   padding: 1rem;
   cursor: pointer;
 `;
-const CustomButton = styled.div`
-  dispaly: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 export function TrackCard({ item, currentPlayingId, isPlaying, onPlay, onPause }) {
   const { trackName, artistName, artworkUrl100, previewUrl, trackId } = item;
   return (
-    <CustomCard data-testid="track-card">
-      <Link to={`/track/${trackId}`}>
+    <Link to={`/track/${trackId}`}>
+      <CustomCard data-testid="track-card">
         <ImageCard>
           <Image alt="artwork" src={artworkUrl100} />
           <TextCard data-testid="text-card" title={trackName} description={artistName} />
         </ImageCard>
-      </Link>
-      <CustomButton>
-        <If condition={isPlaying && item.trackId === currentPlayingId}>
-          <CustomPause data-testid="pause-button" onClick={() => onPause(previewUrl)} />
-        </If>
-        <If condition={!(isPlaying && item.trackId === currentPlayingId)}>
-          <CustomPlay data-testid="play-button" onClick={() => onPlay(previewUrl, trackId)} />
+        <If
+          condition={!(isPlaying && item.trackId === currentPlayingId)}
+          otherwise={<CustomPause data-testid="pause-button" onClick={(e) => onPause(e)} />}
+        >
+          <CustomPlay data-testid="play-button" onClick={(e) => onPlay(previewUrl, trackId, e)} />
         </If>
         <CustomRight />
-      </CustomButton>
-    </CustomCard>
+      </CustomCard>
+    </Link>
   );
 }
 

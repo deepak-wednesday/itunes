@@ -3,15 +3,15 @@
 exports[`<TrackCard /> should render and match the snapshot 1`] = `
 <body>
   <div>
-    <div
-      class="ant-card ant-card-bordered TrackCard__CustomCard-sc-10bk196-0 hZPEMI"
-      data-testid="track-card"
+    <a
+      href="/track/1469577741"
     >
       <div
-        class="ant-card-body"
+        class="ant-card ant-card-bordered TrackCard__CustomCard-sc-10bk196-0 hZPEMI"
+        data-testid="track-card"
       >
-        <a
-          href="/track/1469577741"
+        <div
+          class="ant-card-body"
         >
           <div
             class="ant-card ant-card-bordered TrackCard__ImageCard-sc-10bk196-1 jvaOyH"
@@ -45,10 +45,6 @@ exports[`<TrackCard /> should render and match the snapshot 1`] = `
               </div>
             </div>
           </div>
-        </a>
-        <div
-          class="TrackCard__CustomButton-sc-10bk196-7 cOpOKr"
-        >
           <span
             aria-label="play-circle"
             class="anticon anticon-play-circle TrackCard__CustomPlay-sc-10bk196-5 jxbcWi"
@@ -109,7 +105,7 @@ exports[`<TrackCard /> should render and match the snapshot 1`] = `
           </span>
         </div>
       </div>
-    </div>
+    </a>
   </div>
 </body>
 `;

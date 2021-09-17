@@ -103,7 +103,8 @@ export function ItunesContainer({
   };
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
 
-  const playSong = (url, trackId) => {
+  const playSong = (url, trackId, event) => {
+    event.preventDefault();
     setIsPlaying(true);
     setTuneId(trackId);
     audio?.pause();
@@ -116,7 +117,8 @@ export function ItunesContainer({
     currentAudio.play();
   };
 
-  const pauseSong = () => {
+  const pauseSong = (event) => {
+    event.preventDefault();
     setIsPlaying(false);
     audio?.pause();
     setCurrent(audio?.currentTime);

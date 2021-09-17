@@ -20,7 +20,7 @@ export function* getItunesData(action) {
 
 export function* getTrackData(action) {
   const trackData = yield select(selectItunesData());
-  const trackCache = trackData.results?.(action.trackId);
+  const trackCache = trackData?.results?.find((item) => item.trackId === parseInt(action.trackId, 10));
   if (trackCache) {
     yield put(successGetTrackDetails(trackCache));
   } else {
