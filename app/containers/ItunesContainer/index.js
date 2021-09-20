@@ -73,11 +73,7 @@ export function ItunesContainer({
   trackWidth
 }) {
   const [loading, setLoading] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [tuneId, setTuneId] = useState(null);
-  const [audio, setAudio] = useState(null);
-  const [current, setCurrent] = useState(0);
-  const [trackUrl, setTrackUrl] = useState(null);
+  const [track, setTrack] = useState(null);
 
   useEffect(() => {
     const loaded = get(itunesData, 'results', null) || itunesError;
@@ -103,27 +99,17 @@ export function ItunesContainer({
   };
   const debouncedHandleOnChange = debounce(handleOnChange, 200);
 
-  const playSong = (url, trackId) => {
-    setIsPlaying(true);
-    setTuneId(trackId);
-    audio?.pause();
-    const currentAudio = new Audio(url);
-    setAudio(currentAudio);
-    if (current && url === trackUrl) {
-      currentAudio.currentTime = current;
-    }
-    setTrackUrl(url);
-    currentAudio.play();
-  };
-
-  const pauseSong = () => {
-    setIsPlaying(false);
-    audio?.pause();
-    setCurrent(audio?.currentTime);
-  };
   const renderTrack = () => {
     const items = get(itunesData, 'results', []);
     const resultCount = get(itunesData, 'resultCount', 0);
+
+    const handleOnClick = (ref) => {
+      setTrack(ref);
+      const onPause = track?.current?.paused;
+      if (!onPause && ref?.current.src !== track?.current?.src) {
+        track?.current?.pause();
+      }
+    };
     return (
       (items.length !== 0 || loading) && (
         <Skeleton datat-testid="skeleton" loading={loading} active>
@@ -142,15 +128,7 @@ export function ItunesContainer({
             of={items}
             ParentComponent={MusicGrid}
             renderItem={(item, index) => (
-              <TrackCard
-                data-testid="track-card"
-                item={item}
-                key={index}
-                currentPlayingId={tuneId}
-                isPlaying={isPlaying}
-                onPlay={playSong}
-                onPause={pauseSong}
-              />
+              <TrackCard data-testid="track-card" item={item} key={index} handleOnClick={handleOnClick} />
             )}
           />
         </Skeleton>
@@ -168,7 +146,7 @@ export function ItunesContainer({
       !loading &&
       trackError && (
         <CustomCard color={itunesError ? 'red' : 'grey'} title={intl.formatMessage({ id: 'Itunes_list' })}>
-          <T id={trackError} />
+          <T data-testid="itunes-error" id={trackError} />
         </CustomCard>
       )
     );
@@ -226,7 +204,7 @@ const mapStateToProps = createStructuredSelector({
   artistName: selectItunesName()
 });
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   const { requestGetArtist, clearArtist } = itunesContainerCreators;
   return {
     dispatchArtistData: (artistName) => dispatch(requestGetArtist(artistName)),

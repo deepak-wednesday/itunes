@@ -4,11 +4,12 @@
  *
  */
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Card } from 'antd';
-import { PlayCircleTwoTone, RightCircleTwoTone, PauseCircleTwoTone } from '@ant-design/icons';
+import { Card, Button } from 'antd';
+import { PlayCircleTwoTone, PauseCircleTwoTone, RightCircleTwoTone, LeftCircleTwoTone } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import * as colors from '@app/themes/colors';
 import If from '@components/If';
 
@@ -22,21 +23,37 @@ const CustomCard = styled(Card)`
     background-color: ${colors.trackCardColor};
   }
 `;
+const ImageCard = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 15em;
+  height: ${(props) => (props.height ? props.height : 24)}em;
+`;
 const TextCard = styled(Meta)`
   && {
-    margin: 0.2rem !important;
+    margin: 0.3rem !important;
+    width: 15em;
+    padding: 1em;
   }
 `;
 const Image = styled.img`
-  width: 250px;
+  width: 15em;
   height: ${(props) => (props.height ? props.height : 18)}em;
 `;
-const CustomPause = styled(PauseCircleTwoTone)`
+const CustomButtons = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 5em;
+`;
+const CustomPlay = styled(PlayCircleTwoTone)`
   font-size: 2rem;
   padding: 1rem;
   cursor: pointer;
 `;
-const CustomPlay = styled(PlayCircleTwoTone)`
+const CustomPause = styled(PauseCircleTwoTone)`
   font-size: 2rem;
   padding: 1rem;
   cursor: pointer;
@@ -46,43 +63,69 @@ const CustomRight = styled(RightCircleTwoTone)`
   padding: 1rem;
   cursor: pointer;
 `;
-const CustomButton = styled.div`
-  dispaly: flex;
-  justify-content: center;
-  align-items: center;
+const CustomLeft = styled(LeftCircleTwoTone)`
+  font-size: 2rem;
+  padding: 1rem;
+  cursor: pointer;
 `;
 
-export function TrackCard({ item, currentPlayingId, isPlaying, onPlay, onPause }) {
-  const { artworkUrl100, trackName, artistName, previewUrl, trackId } = item;
+export function TrackCard({ item, handleOnClick }) {
+  const { trackName, artistName, artworkUrl100, previewUrl, trackId } = item;
+
+  const [play, setPlay] = useState(false);
+
+  const audioElement = useRef();
+
+  const handleAudio = (e, url) => {
+    e.preventDefault();
+    const isPaused = audioElement.current.paused;
+    if (isPaused) {
+      audioElement.current.src = url;
+      audioElement.current.play();
+    } else {
+      audioElement.current.pause();
+    }
+    setPlay(!play);
+    if (handleOnClick) {
+      handleOnClick(audioElement);
+    }
+  };
   return (
-    <CustomCard data-testid="track-card" cover={<Image alt="artwork" src={artworkUrl100} />}>
-      <TextCard data-testid="text-card" title={trackName} description={artistName} />
-      <CustomButton>
-        <If condition={isPlaying && item.trackId === currentPlayingId}>
-          <CustomPause data-testid="pause-button" onClick={() => onPause(previewUrl, trackId)} />
-        </If>
-        <If condition={!(isPlaying && item.trackId === currentPlayingId)}>
-          <CustomPlay data-testid="play-button" onClick={() => onPlay(previewUrl, trackId)} />
-        </If>
-        <CustomRight />
-      </CustomButton>
-    </CustomCard>
+    <Link to={`/track/${trackId}`}>
+      <CustomCard data-testid="track-card">
+        <ImageCard>
+          <Image alt="artwork" src={artworkUrl100} />
+          <TextCard data-testid="text-card" title={trackName} description={artistName} />
+        </ImageCard>
+        <CustomButtons
+          data-testid="buttons"
+          shape="circle"
+          onClick={(e) => handleAudio(e, previewUrl)}
+          icon={
+            <>
+              <CustomLeft />
+              <If condition={!audioElement.current?.paused && audioElement.current?.src} otherwise={<CustomPlay />}>
+                <CustomPause />
+              </If>
+              <CustomRight />
+            </>
+          }
+        />
+        <audio ref={audioElement} data-testid="audio"></audio>
+      </CustomCard>
+    </Link>
   );
 }
 
 TrackCard.propTypes = {
-  item: PropTypes.shape({
-    trackId: PropTypes.number,
-    artworkUrl100: PropTypes.string,
-    trackName: PropTypes.string,
-    artistName: PropTypes.string,
-    previewUrl: PropTypes.string
-  }),
   height: PropTypes.number,
+  item: PropTypes.object,
   onPause: PropTypes.func,
   onPlay: PropTypes.func,
   currentPlayingId: PropTypes.number,
-  isPlaying: PropTypes
+  isPlaying: PropTypes.bool,
+  trackId: PropTypes.number,
+  handleOnClick: PropTypes.func
 };
 
 export default TrackCard;
