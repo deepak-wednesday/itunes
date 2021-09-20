@@ -14,21 +14,69 @@ import { isEmpty } from 'lodash';
 import { compose } from 'redux';
 import { injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
-import { Skeleton } from 'antd';
-import TrackCard from '@components/TrackCard';
+import { Skeleton, Card, Avatar, Button, List } from 'antd';
+import { PlayCircleTwoTone, RightCircleTwoTone, LeftCircleTwoTone } from '@ant-design/icons';
 import If from '@components/If';
 import { T } from '@components/T';
+import * as colors from '@app/themes/colors';
 import { itunesContainerCreators } from '../reducer';
 import { selectItunesContainer, selectTrackData, selectTrackError } from '../selectors';
 import { trackDetailsSaga } from '../saga';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 0 auto;
-`;
+const { Meta } = Card;
 
+const Container = styled.div`
+  && {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: ${(props) => props.maxwidth}px;
+    padding: ${(props) => props.padding}px;
+    width: 100%;
+    margin: 0 auto;
+  }
+`;
+const CustomCard = styled(Card)`
+  && {
+    padding: 20px;
+    margin: 0 200px;
+    width: 100%;
+    border-radius: 10px;
+    border: 5px solid ${colors.listcolor};
+  }
+`;
+const ListContainer = styled.div`
+  && {
+    border-radius: 10px;
+    border: 5px solid ${colors.listcolor};
+    width: 35%;
+    padding: 2em;
+  }
+`;
+const StyledImage = styled.img`
+  width: 18em;
+  height: 18em;
+`;
+const CustomButtons = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 5em;
+`;
+const CustomPlay = styled(PlayCircleTwoTone)`
+  font-size: 2rem;
+  padding: 1rem;
+  cursor: pointer;
+`;
+const CustomRight = styled(RightCircleTwoTone)`
+  font-size: 2rem;
+  padding: 1rem;
+  cursor: pointer;
+`;
+const CustomLeft = styled(LeftCircleTwoTone)`
+  font-size: 2rem;
+  padding: 1rem;
+  cursor: pointer;
+`;
 export function TrackDetail({
   dispatchTrackData,
   dispatchClearTrackData,
@@ -42,12 +90,83 @@ export function TrackDetail({
   useEffect(() => {
     dispatchClearTrackData();
     dispatchTrackData(trackId);
-  }, []);
+  }, [trackId]);
+  const trackCard = () => {
+    return (
+      <CustomCard style={{ width: 300 }} cover={<StyledImage alt="example" src={trackDetails.artworkUrl100} />}>
+        <Meta
+          avatar={<Avatar src={trackDetails.artworkUrl30} />}
+          title={trackDetails.trackName}
+          description={trackDetails.artistName}
+        />
+        <CustomButtons
+          shape="circle"
+          icon={
+            <>
+              <CustomRight />
+              <CustomPlay />
+              <CustomLeft />
+            </>
+          }
+        />
+      </CustomCard>
+    );
+  };
+  const listCard = () => {
+    return (
+      <ListContainer>
+        <List.Item>
+          <List.Item.Meta
+            avatar={<Avatar src={trackDetails.artworkUrl30} />}
+            title={<a href="https://ant.design">{trackDetails.collectionName}</a>}
+            description={trackDetails.collectionCensoredName}
+          />
+        </List.Item>
+        <List.Item>
+          <List.Item.Meta
+            avatar={<Avatar src={trackDetails.artworkUrl30} />}
+            title={<a href="https://ant.design">{trackDetails.collectionName}</a>}
+            description={trackDetails.collectionCensoredName}
+          />
+        </List.Item>
+        <List.Item>
+          <List.Item.Meta
+            avatar={<Avatar src={trackDetails.artworkUrl30} />}
+            title={<a href="https://ant.design">{trackDetails.collectionName}</a>}
+            description={trackDetails.collectionCensoredName}
+          />
+        </List.Item>
+        <List.Item>
+          <List.Item.Meta
+            avatar={<Avatar src={trackDetails.artworkUrl30} />}
+            title={<a href="https://ant.design">{trackDetails.collectionName}</a>}
+            description={trackDetails.collectionCensoredName}
+          />
+        </List.Item>
+        <List.Item>
+          <List.Item.Meta
+            avatar={<Avatar src={trackDetails.artworkUrl30} />}
+            title={<a href="https://ant.design">{trackDetails.collectionName}</a>}
+            description={trackDetails.collectionCensoredName}
+          />
+        </List.Item>
+        <List.Item>
+          <List.Item.Meta
+            avatar={<Avatar src={trackDetails.artworkUrl30} />}
+            title={<a href="https://ant.design">{trackDetails.collectionName}</a>}
+            description={trackDetails.collectionCensoredName}
+          />
+        </List.Item>
+      </ListContainer>
+    );
+  };
+
   return (
-    <Container>
+    <Container maxwidth={maxwidth} padding={padding}>
       <If condition={isEmpty(trackError)} otherwise={<T id="something_went_wrong" />}>
         <Skeleton loading={isEmpty(trackDetails)} active>
-          <TrackCard item={trackDetails} trackDetails />
+          {trackCard()}
+          {listCard()}
         </Skeleton>
       </If>
     </Container>
