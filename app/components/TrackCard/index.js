@@ -4,11 +4,11 @@
  *
  */
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Card } from 'antd';
-import { PlayCircleTwoTone, RightCircleTwoTone, PauseCircleTwoTone } from '@ant-design/icons';
+import { Card, Button } from 'antd';
+import { PlayCircleTwoTone, PauseCircleTwoTone, RightCircleTwoTone, LeftCircleTwoTone } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import * as colors from '@app/themes/colors';
 import If from '@components/If';
@@ -42,12 +42,18 @@ const Image = styled.img`
   width: 15em;
   height: ${(props) => (props.height ? props.height : 18)}em;
 `;
-const CustomPause = styled(PauseCircleTwoTone)`
+const CustomButtons = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1em 5em;
+`;
+const CustomPlay = styled(PlayCircleTwoTone)`
   font-size: 2rem;
   padding: 1rem;
   cursor: pointer;
 `;
-const CustomPlay = styled(PlayCircleTwoTone)`
+const CustomPause = styled(PauseCircleTwoTone)`
   font-size: 2rem;
   padding: 1rem;
   cursor: pointer;
@@ -57,9 +63,33 @@ const CustomRight = styled(RightCircleTwoTone)`
   padding: 1rem;
   cursor: pointer;
 `;
+const CustomLeft = styled(LeftCircleTwoTone)`
+  font-size: 2rem;
+  padding: 1rem;
+  cursor: pointer;
+`;
 
-export function TrackCard({ item, currentPlayingId, isPlaying, onPlay, onPause }) {
+export function TrackCard({ item, handleOnClick }) {
   const { trackName, artistName, artworkUrl100, previewUrl, trackId } = item;
+
+  const [play, setPlay] = useState(false);
+
+  const audioElement = useRef();
+
+  const handleAudio = (e, url) => {
+    e.preventDefault();
+    const isPaused = audioElement.current.paused;
+    if (isPaused) {
+      audioElement.current.src = url;
+      audioElement.current.play();
+    } else {
+      audioElement.current.pause();
+    }
+    setPlay(!play);
+    if (handleOnClick) {
+      handleOnClick(audioElement);
+    }
+  };
   return (
     <Link to={`/track/${trackId}`}>
       <CustomCard data-testid="track-card">
@@ -67,13 +97,21 @@ export function TrackCard({ item, currentPlayingId, isPlaying, onPlay, onPause }
           <Image alt="artwork" src={artworkUrl100} />
           <TextCard data-testid="text-card" title={trackName} description={artistName} />
         </ImageCard>
-        <If
-          condition={!(isPlaying && item.trackId === currentPlayingId)}
-          otherwise={<CustomPause data-testid="pause-button" onClick={(e) => onPause(e)} />}
-        >
-          <CustomPlay data-testid="play-button" onClick={(e) => onPlay(previewUrl, trackId, e)} />
-        </If>
-        <CustomRight />
+        <CustomButtons
+          data-testid="buttons"
+          shape="circle"
+          onClick={(e) => handleAudio(e, previewUrl)}
+          icon={
+            <>
+              <CustomLeft />
+              <If condition={!audioElement.current?.paused && audioElement.current?.src} otherwise={<CustomPlay />}>
+                <CustomPause />
+              </If>
+              <CustomRight />
+            </>
+          }
+        />
+        <audio ref={audioElement} data-testid="audio"></audio>
       </CustomCard>
     </Link>
   );
@@ -86,7 +124,8 @@ TrackCard.propTypes = {
   onPlay: PropTypes.func,
   currentPlayingId: PropTypes.number,
   isPlaying: PropTypes.bool,
-  trackId: PropTypes.number
+  trackId: PropTypes.number,
+  handleOnClick: PropTypes.func
 };
 
 export default TrackCard;

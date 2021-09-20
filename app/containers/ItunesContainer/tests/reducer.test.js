@@ -46,7 +46,7 @@ describe('ItunesContainer reducer tests', () => {
       })
     ).toEqual(expectedResult);
   });
-  it('should ensure when CLEAR_ARTIST is dispatched , it clears the trackDetails', () => {
+  it('should ensure that trackDetails are cleared when CLEAR_ARTIST is dispatched', () => {
     const expectedResult = { ...state };
     expect(
       itunesContainerReducer(state, {
@@ -54,7 +54,7 @@ describe('ItunesContainer reducer tests', () => {
       })
     ).toEqual(expectedResult);
   });
-  it('should return state when an action of REQUEST_GET_TRACK_DETAILS is dispatched', () => {
+  it('should update the initial state when an action of REQUEST_GET_TRACK_DETAILS is dispatched', () => {
     const trackId = '1234';
     const expectedResult = { ...state, trackId };
     expect(

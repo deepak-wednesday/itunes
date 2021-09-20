@@ -8,7 +8,7 @@
 import React from 'react';
 import { timeout, renderProvider, renderWithIntl } from '@utils/testUtils';
 import { fireEvent } from '@testing-library/dom';
-import { ItunesContainerTest as ItunesContainer } from '../index';
+import { ItunesContainerTest as ItunesContainer, mapDispatchToProps } from '../index';
 
 describe('<ItunesContainer /> container tests', () => {
   let submitSpy;
@@ -52,5 +52,56 @@ describe('<ItunesContainer /> container tests', () => {
     renderWithIntl(<ItunesContainer artistName={artistName} dispatchArtistData={submitSpy} />);
     await timeout(500);
     expect(submitSpy).toBeCalled();
+  });
+  it('should update state and render the data of itunesData', () => {
+    const itunesData = {
+      resultCount: 50,
+      results: [{ artistName: 'dp' }]
+    };
+    const { getByTestId } = renderWithIntl(<ItunesContainer itunesData={itunesData} />);
+    expect(getByTestId('for')).toBeInTheDocument();
+  });
+  it('should ensure that resultCount is equal to total trackCard rendered', () => {
+    const resultCount = 1;
+    const itunesData = {
+      resultCount,
+      results: [
+        {
+          artistName: 'dp'
+        }
+      ]
+    };
+    const { getAllByTestId } = renderWithIntl(
+      <ItunesContainer dispatchArtistData={submitSpy} itunesData={itunesData} />
+    );
+    expect(getAllByTestId('track-card')).toHaveLength(resultCount);
+  });
+
+  it('should dispatchArtistData, if page is being refresh', async () => {
+    const artistName = 'dp';
+    renderWithIntl(<ItunesContainer artistName={artistName} dispatchArtistData={submitSpy} />);
+    await timeout(500);
+    expect(submitSpy).toBeCalled();
+  });
+
+  it('should ensure that mapDispatchToProps action work', async () => {
+    const dispatchGetArtistSpy = jest.fn();
+    const artistName = 'dp';
+    const actions = {
+      dispatchArtistData: { artistName, type: 'REQUEST_GET_ARTIST' },
+      dispatchClearArtistData: { type: 'CLEAR_ARTIST' }
+    };
+    const props = mapDispatchToProps(dispatchGetArtistSpy);
+    props.dispatchArtistData(artistName);
+    expect(dispatchGetArtistSpy).toHaveBeenCalledWith(actions.dispatchArtistData);
+
+    await timeout(500);
+    props.dispatchClearArtistData();
+    expect(dispatchGetArtistSpy).toHaveBeenCalledWith(actions.dispatchClearArtistData);
+  });
+  it('should render error message', async () => {
+    const { getByTestId } = renderWithIntl(<ItunesContainer dispatchArtistData={submitSpy} itunesError="error" />);
+    await timeout(500);
+    expect(getByTestId('itunes-error')).toBeInTheDocument();
   });
 });
