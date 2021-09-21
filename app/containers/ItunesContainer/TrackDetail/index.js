@@ -15,7 +15,7 @@ import { compose } from 'redux';
 import { injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 import { Skeleton, Card, Avatar, Button, List } from 'antd';
-import { PlayCircleTwoTone, RightCircleTwoTone, LeftCircleTwoTone } from '@ant-design/icons';
+import { PlayCircleTwoTone } from '@ant-design/icons';
 import If from '@components/If';
 import { T } from '@components/T';
 import * as colors from '@app/themes/colors';
@@ -67,16 +67,7 @@ const CustomPlay = styled(PlayCircleTwoTone)`
   padding: 1rem;
   cursor: pointer;
 `;
-const CustomRight = styled(RightCircleTwoTone)`
-  font-size: 2rem;
-  padding: 1rem;
-  cursor: pointer;
-`;
-const CustomLeft = styled(LeftCircleTwoTone)`
-  font-size: 2rem;
-  padding: 1rem;
-  cursor: pointer;
-`;
+
 export function TrackDetail({
   dispatchTrackData,
   dispatchClearTrackData,
@@ -103,16 +94,7 @@ export function TrackDetail({
           title={trackDetails.trackName}
           description={trackDetails.artistName}
         />
-        <CustomButtons
-          shape="circle"
-          icon={
-            <>
-              <CustomRight />
-              <CustomPlay />
-              <CustomLeft />
-            </>
-          }
-        />
+        <CustomButtons shape="circle" icon={<CustomPlay />} />
       </CustomCard>
     );
   };
@@ -154,7 +136,7 @@ export function TrackDetail({
             description={trackDetails.primaryGenreName}
           />
         </List.Item>
-        <List.Item>
+        <List.Item data-testid="list-item">
           <List.Item.Meta
             avatar={<Avatar src={trackDetails.artworkUrl30} />}
             title={trackDetails.trackName}

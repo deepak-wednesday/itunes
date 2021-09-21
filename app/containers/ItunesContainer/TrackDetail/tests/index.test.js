@@ -84,6 +84,7 @@ describe('<TrackDetail />', () => {
     );
     expect(getByTestId('track-details-card')).toBeInTheDocument();
   });
+
   it('should ensure that mapDispatchToProps works fine', async () => {
     const dispatchGetTrackDetailsSpy = jest.fn();
     const trackId = '1234';
@@ -98,5 +99,24 @@ describe('<TrackDetail />', () => {
     await timeout(500);
     props.dispatchClearTrackData();
     expect(dispatchGetTrackDetailsSpy).toHaveBeenCalledWith(actions.dispatchClearTrackData);
+  });
+
+  it('should ensure that list render correct value', () => {
+    const fakeList = [
+      (trackDetails = {
+        trackName: 'dp',
+        trackPrice: '2',
+        artworkUrl100:
+          'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/100x100bb.jpg'
+      })
+    ];
+    const { getAllByTestId } = renderWithIntl(
+      <TrackDetail trackDetails={fakeList} dispatchTrackData={submitSpy} dispatchClearTrackData={submitSpyClear} />
+    );
+    const listItems = getAllByTestId('list-item')?.fakeList?.map((li) => li.trackName);
+    const fakeItems = fakeList?.trackDetails?.map((i) => {
+      i.trackName;
+    });
+    expect(listItems).toEqual(fakeItems);
   });
 });
