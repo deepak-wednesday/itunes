@@ -8,7 +8,7 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Card, Button } from 'antd';
-import { PlayCircleTwoTone, PauseCircleTwoTone } from '@ant-design/icons';
+import { PlayCircleTwoTone, PauseCircleTwoTone, RightCircleTwoTone, LeftCircleTwoTone } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import * as colors from '@app/themes/colors';
 import If from '@components/If';
@@ -58,6 +58,16 @@ const CustomPause = styled(PauseCircleTwoTone)`
   padding: 1rem;
   cursor: pointer;
 `;
+const CustomRight = styled(RightCircleTwoTone)`
+  font-size: 2rem;
+  padding: 1rem;
+  cursor: pointer;
+`;
+const CustomLeft = styled(LeftCircleTwoTone)`
+  font-size: 2rem;
+  padding: 1rem;
+  cursor: pointer;
+`;
 
 export function TrackCard({ item, handleOnClick }) {
   const { trackName, artistName, artworkUrl100, previewUrl, trackId } = item;
@@ -92,9 +102,13 @@ export function TrackCard({ item, handleOnClick }) {
           shape="circle"
           onClick={(e) => handleAudio(e, previewUrl)}
           icon={
-            <If condition={!audioElement.current?.paused && audioElement.current?.src} otherwise={<CustomPlay />}>
-              <CustomPause />
-            </If>
+            <>
+              <CustomLeft />
+              <If condition={!audioElement.current?.paused && audioElement.current?.src} otherwise={<CustomPlay />}>
+                <CustomPause />
+              </If>
+              <CustomRight />
+            </>
           }
         />
         <audio ref={audioElement} data-testid="audio"></audio>
