@@ -42,6 +42,7 @@ const CustomCard = styled(Card)`
     width: 100%;
     border-radius: 10px;
     border: 5px solid ${colors.listcolor};
+    height: 410px;
   }
 `;
 const ListContainer = styled.div`
@@ -49,7 +50,8 @@ const ListContainer = styled.div`
     border-radius: 10px;
     border: 5px solid ${colors.listcolor};
     width: 30%;
-    padding: 2em;
+    padding: 1.5em;
+    height: inherit;
   }
 `;
 const StyledImage = styled.img`
@@ -111,22 +113,8 @@ export function TrackDetail({
         <List.Item>
           <List.Item.Meta
             avatar={<Avatar src={trackDetails.artworkUrl30} />}
-            title={trackDetails.trackName}
-            description={trackDetails.collectionCensoredName}
-          />
-        </List.Item>
-        <List.Item>
-          <List.Item.Meta
-            avatar={<Avatar src={trackDetails.artworkUrl30} />}
             title={trackDetails.trackCensoredName}
             description={trackDetails.primaryGenreName}
-          />
-        </List.Item>
-        <List.Item>
-          <List.Item.Meta
-            avatar={<Avatar src={trackDetails.artworkUrl30} />}
-            title={trackDetails.trackName}
-            description={trackDetails.collectionCensoredName}
           />
         </List.Item>
         <List.Item>

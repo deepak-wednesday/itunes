@@ -89,7 +89,7 @@ exports[`<ItunesContainer /> container tests should render and match the snapsho
         >
           <p
             class="T__StyledText-gjlic1-0 kYcyRq"
-            data-testid="itunes-error"
+            data-testid="t"
           >
             Search for a songs by entering it's artist name in the search box
           </p>
