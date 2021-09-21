@@ -143,12 +143,13 @@ export function ItunesContainer({
       trackError = 'artist_search_default';
     }
     return (
-      !loading &&
-      trackError && (
+      <If condition={!loading && trackError && isEmpty(itunesData)}>
         <CustomCard color={itunesError ? 'red' : 'grey'} title={intl.formatMessage({ id: 'Itunes_list' })}>
-          <T data-testid="itunes-error" id={trackError} />
+          <If condition={itunesError} otherwise={<T id={trackError} />}>
+            <T data-testid="itunes-error" text={trackError} />
+          </If>
         </CustomCard>
-      )
+      </If>
     );
   };
 
