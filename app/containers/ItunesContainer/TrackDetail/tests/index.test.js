@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { TrackDetailTest as TrackDetail } from '../index';
+import { TrackDetailTest as TrackDetail, mapDispatchToProps } from '../index';
 import { timeout, renderWithIntl } from '@utils/testUtils';
 import { setIntl } from '@app/components/IntlGlobalProvider';
 import customIntl from '@app/utils/customIntl';
@@ -71,5 +71,32 @@ describe('<TrackDetail />', () => {
     await timeout(500);
     expect(submitSpyClear).toBeCalled();
     expect(submitSpy).toBeCalled();
+  });
+  it('should render the trackDetails card image', () => {
+    const { getByTestId } = renderWithIntl(
+      <TrackDetail trackDetails={trackDetails} dispatchTrackData={submitSpy} dispatchClearTrackData={submitSpyClear} />
+    );
+    expect(getByTestId('track-image')).toBeInTheDocument();
+  });
+  it('should ensure that the trackCard render properly', () => {
+    const { getByTestId } = renderWithIntl(
+      <TrackDetail trackDetails={trackDetails} dispatchTrackData={submitSpy} dispatchClearTrackData={submitSpyClear} />
+    );
+    expect(getByTestId('track-details-card')).toBeInTheDocument();
+  });
+  it('should ensure that mapDispatchToProps works fine', async () => {
+    const dispatchGetTrackDetailsSpy = jest.fn();
+    const trackId = '1234';
+    const actions = {
+      dispatchTrackData: { trackId, type: 'REQUEST_GET_TRACK_DETAILS' },
+      dispatchClearTrackData: { type: 'CLEAR_TRACK_DETAILS' }
+    };
+    const props = mapDispatchToProps(dispatchGetTrackDetailsSpy);
+    props.dispatchTrackData(trackId);
+    expect(dispatchGetTrackDetailsSpy).toHaveBeenCalledWith(actions.dispatchTrackData);
+
+    await timeout(500);
+    props.dispatchClearTrackData();
+    expect(dispatchGetTrackDetailsSpy).toHaveBeenCalledWith(actions.dispatchClearTrackData);
   });
 });

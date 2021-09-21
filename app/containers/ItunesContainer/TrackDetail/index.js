@@ -48,7 +48,7 @@ const ListContainer = styled.div`
   && {
     border-radius: 10px;
     border: 5px solid ${colors.listcolor};
-    width: 35%;
+    width: 30%;
     padding: 2em;
   }
 `;
@@ -93,7 +93,11 @@ export function TrackDetail({
   }, [trackId]);
   const trackCard = () => {
     return (
-      <CustomCard style={{ width: 300 }} cover={<StyledImage alt="example" src={trackDetails.artworkUrl100} />}>
+      <CustomCard
+        data-testid="track-details-card"
+        style={{ width: 300 }}
+        cover={<StyledImage data-testid="track-image" alt="example" src={trackDetails.artworkUrl100} />}
+      >
         <Meta
           avatar={<Avatar src={trackDetails.artworkUrl30} />}
           title={trackDetails.trackName}
@@ -118,43 +122,43 @@ export function TrackDetail({
         <List.Item>
           <List.Item.Meta
             avatar={<Avatar src={trackDetails.artworkUrl30} />}
-            title={<a href="https://ant.design">{trackDetails.collectionName}</a>}
+            title={trackDetails.collectionName}
+            description={trackDetails.primaryGenreName}
+          />
+        </List.Item>
+        <List.Item>
+          <List.Item.Meta
+            avatar={<Avatar src={trackDetails.artworkUrl30} />}
+            title={trackDetails.trackName}
             description={trackDetails.collectionCensoredName}
           />
         </List.Item>
         <List.Item>
           <List.Item.Meta
             avatar={<Avatar src={trackDetails.artworkUrl30} />}
-            title={<a href="https://ant.design">{trackDetails.collectionName}</a>}
+            title={trackDetails.trackCensoredName}
+            description={trackDetails.primaryGenreName}
+          />
+        </List.Item>
+        <List.Item>
+          <List.Item.Meta
+            avatar={<Avatar src={trackDetails.artworkUrl30} />}
+            title={trackDetails.trackName}
             description={trackDetails.collectionCensoredName}
           />
         </List.Item>
         <List.Item>
           <List.Item.Meta
             avatar={<Avatar src={trackDetails.artworkUrl30} />}
-            title={<a href="https://ant.design">{trackDetails.collectionName}</a>}
-            description={trackDetails.collectionCensoredName}
+            title={trackDetails.collectionName}
+            description={trackDetails.primaryGenreName}
           />
         </List.Item>
         <List.Item>
           <List.Item.Meta
             avatar={<Avatar src={trackDetails.artworkUrl30} />}
-            title={<a href="https://ant.design">{trackDetails.collectionName}</a>}
-            description={trackDetails.collectionCensoredName}
-          />
-        </List.Item>
-        <List.Item>
-          <List.Item.Meta
-            avatar={<Avatar src={trackDetails.artworkUrl30} />}
-            title={<a href="https://ant.design">{trackDetails.collectionName}</a>}
-            description={trackDetails.collectionCensoredName}
-          />
-        </List.Item>
-        <List.Item>
-          <List.Item.Meta
-            avatar={<Avatar src={trackDetails.artworkUrl30} />}
-            title={<a href="https://ant.design">{trackDetails.collectionName}</a>}
-            description={trackDetails.collectionCensoredName}
+            title={trackDetails.trackName}
+            description={trackDetails.trackPrice}
           />
         </List.Item>
       </ListContainer>

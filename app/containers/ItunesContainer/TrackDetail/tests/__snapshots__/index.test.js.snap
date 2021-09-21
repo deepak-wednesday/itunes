@@ -8,6 +8,7 @@ exports[`<TrackDetail /> should render and match the snapshot 1`] = `
     >
       <div
         class="ant-card ant-card-bordered TrackDetail__CustomCard-sc-1rmz6ii-1 ggcAzF"
+        data-testid="track-details-card"
         style="width: 300px;"
       >
         <div
@@ -16,6 +17,7 @@ exports[`<TrackDetail /> should render and match the snapshot 1`] = `
           <img
             alt="example"
             class="TrackDetail__StyledImage-sc-1rmz6ii-3 gByhtW"
+            data-testid="track-image"
             src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/100x100bb.jpg"
           />
         </div>
@@ -143,7 +145,7 @@ exports[`<TrackDetail /> should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="TrackDetail__ListContainer-sc-1rmz6ii-2 dkoObm"
+        class="TrackDetail__ListContainer-sc-1rmz6ii-2 evKjfX"
       >
         <li
           class="ant-list-item"
@@ -168,11 +170,40 @@ exports[`<TrackDetail /> should render and match the snapshot 1`] = `
               <h4
                 class="ant-list-item-meta-title"
               >
-                <a
-                  href="https://ant.design"
-                >
-                  Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
-                </a>
+                Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
+              </h4>
+              <div
+                class="ant-list-item-meta-description"
+              >
+                Rock
+              </div>
+            </div>
+          </div>
+        </li>
+        <li
+          class="ant-list-item"
+        >
+          <div
+            class="ant-list-item-meta"
+          >
+            <div
+              class="ant-list-item-meta-avatar"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-image"
+              >
+                <img
+                  src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
+                />
+              </span>
+            </div>
+            <div
+              class="ant-list-item-meta-content"
+            >
+              <h4
+                class="ant-list-item-meta-title"
+              >
+                Upside Down
               </h4>
               <div
                 class="ant-list-item-meta-description"
@@ -205,11 +236,40 @@ exports[`<TrackDetail /> should render and match the snapshot 1`] = `
               <h4
                 class="ant-list-item-meta-title"
               >
-                <a
-                  href="https://ant.design"
-                >
-                  Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
-                </a>
+                Upside Down
+              </h4>
+              <div
+                class="ant-list-item-meta-description"
+              >
+                Rock
+              </div>
+            </div>
+          </div>
+        </li>
+        <li
+          class="ant-list-item"
+        >
+          <div
+            class="ant-list-item-meta"
+          >
+            <div
+              class="ant-list-item-meta-avatar"
+            >
+              <span
+                class="ant-avatar ant-avatar-circle ant-avatar-image"
+              >
+                <img
+                  src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
+                />
+              </span>
+            </div>
+            <div
+              class="ant-list-item-meta-content"
+            >
+              <h4
+                class="ant-list-item-meta-title"
+              >
+                Upside Down
               </h4>
               <div
                 class="ant-list-item-meta-description"
@@ -242,16 +302,12 @@ exports[`<TrackDetail /> should render and match the snapshot 1`] = `
               <h4
                 class="ant-list-item-meta-title"
               >
-                <a
-                  href="https://ant.design"
-                >
-                  Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
-                </a>
+                Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
               </h4>
               <div
                 class="ant-list-item-meta-description"
               >
-                Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
+                Rock
               </div>
             </div>
           </div>
@@ -279,90 +335,12 @@ exports[`<TrackDetail /> should render and match the snapshot 1`] = `
               <h4
                 class="ant-list-item-meta-title"
               >
-                <a
-                  href="https://ant.design"
-                >
-                  Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
-                </a>
+                Upside Down
               </h4>
               <div
                 class="ant-list-item-meta-description"
               >
-                Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
-              </div>
-            </div>
-          </div>
-        </li>
-        <li
-          class="ant-list-item"
-        >
-          <div
-            class="ant-list-item-meta"
-          >
-            <div
-              class="ant-list-item-meta-avatar"
-            >
-              <span
-                class="ant-avatar ant-avatar-circle ant-avatar-image"
-              >
-                <img
-                  src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
-                />
-              </span>
-            </div>
-            <div
-              class="ant-list-item-meta-content"
-            >
-              <h4
-                class="ant-list-item-meta-title"
-              >
-                <a
-                  href="https://ant.design"
-                >
-                  Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
-                </a>
-              </h4>
-              <div
-                class="ant-list-item-meta-description"
-              >
-                Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
-              </div>
-            </div>
-          </div>
-        </li>
-        <li
-          class="ant-list-item"
-        >
-          <div
-            class="ant-list-item-meta"
-          >
-            <div
-              class="ant-list-item-meta-avatar"
-            >
-              <span
-                class="ant-avatar ant-avatar-circle ant-avatar-image"
-              >
-                <img
-                  src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
-                />
-              </span>
-            </div>
-            <div
-              class="ant-list-item-meta-content"
-            >
-              <h4
-                class="ant-list-item-meta-title"
-              >
-                <a
-                  href="https://ant.design"
-                >
-                  Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
-                </a>
-              </h4>
-              <div
-                class="ant-list-item-meta-description"
-              >
-                Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
+                1.29
               </div>
             </div>
           </div>
