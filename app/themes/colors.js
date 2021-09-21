@@ -14,7 +14,6 @@ const trackCardColor = '#F3F4F6';
 const main = '#4B5563';
 const textColor = '#374151';
 const mainColor = '#FEF3C7';
-const listcolor = '#C7D2FE';
 const colors = {
   transparent: 'rgba(0,0,0,0)',
   // Example colors:
@@ -27,7 +26,6 @@ const colors = {
   main,
   textColor,
   mainColor,
-  listcolor,
   theme: {
     lightMode: {
       primary,
