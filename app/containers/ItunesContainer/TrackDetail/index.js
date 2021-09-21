@@ -18,7 +18,7 @@ import { Skeleton, Card, Avatar, Button, List } from 'antd';
 import { PlayCircleTwoTone } from '@ant-design/icons';
 import If from '@components/If';
 import { T } from '@components/T';
-import * as colors from '@app/themes/colors';
+import { colors } from '@app/themes';
 import { itunesContainerCreators } from '../reducer';
 import { selectItunesContainer, selectTrackData, selectTrackError } from '../selectors';
 import { trackDetailsSaga } from '../saga';
