@@ -65,6 +65,8 @@ export function TrackCard({ item, handleOnClick }) {
   const [play, setPlay] = useState(false);
 
   const audioElement = useRef();
+  
+  console.log(audioElement);
 
   const handleAudio = (e, url) => {
     e.preventDefault();
