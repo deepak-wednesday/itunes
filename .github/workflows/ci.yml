@@ -1,24 +1,26 @@
-name: React Template CI
+name: Itunes CI pipeline
 on:
   pull_request:
     branches: [master]
 jobs:
   build-and-test:
-    name: Build & Test
+    name: Building and Testing itunes App
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [12.x,14.x]
     steps:
-      - uses: actions/checkout@v1
+      - name: checkout 
+      - uses: actions/checkout@v2
       
       - name: Jest coverage report
         uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.4
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
 
       - name: Install dependencies
         run: yarn
