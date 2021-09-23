@@ -41,5 +41,5 @@ jobs:
         run: export BRANCH_NAME=${{ steps.branch.outputs.branch }} && yarn build:uat
 
       - name: Deploy to s3
-        run: aws s3 sync ./build s3://itunes-app/${{ steps.branch.outputs.branch }}
+        run: aws s3 sync ./build s3://dp-uat/${{ steps.branch.outputs.branch }}
     
