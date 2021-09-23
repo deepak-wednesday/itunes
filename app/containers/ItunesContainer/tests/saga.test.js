@@ -7,7 +7,7 @@ import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { getArtists, getTrackDetails } from '@app/services/itunesApi';
 import customIntl from '@utils/customIntl';
 import { apiResponseGenerator } from '@app/utils/testUtils';
-import itunesContainerSaga, { getItunesData, getTrackData, trackDetailsSaga } from '../saga';
+import itunesContainerSaga, { getItunesData, getTrackData } from '../saga';
 import { itunesContainerTypes } from '../reducer';
 import { translate, setIntl } from '@app/components/IntlGlobalProvider/index';
 import { selectItunesData } from '../selectors';
@@ -57,12 +57,13 @@ describe('ItunesContainer getTrackDetails saga tests', () => {
   let trackId = '1234';
   let getTrackDetailsGenerator = getTrackData({ trackId });
   beforeEach(() => {
-    trackGenerator = trackDetailsSaga();
+    trackGenerator = itunesContainerSaga();
     trackId = '1234';
     getTrackDetailsGenerator = getTrackData({ trackId });
   });
 
   it('should start task to watch for REQUEST_GET_TRACK_DETAILS action', () => {
+    trackGenerator.next();
     expect(trackGenerator.next().value).toEqual(
       takeLatest(itunesContainerTypes.REQUEST_GET_TRACK_DETAILS, getTrackData)
     );

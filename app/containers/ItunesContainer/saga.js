@@ -37,8 +37,5 @@ export function* getTrackData(action) {
 
 export default function* itunesContainerSaga() {
   yield takeLatest(REQUEST_GET_ARTIST, getItunesData);
-}
-
-export function* trackDetailsSaga() {
   yield takeLatest(REQUEST_GET_TRACK_DETAILS, getTrackData);
 }
