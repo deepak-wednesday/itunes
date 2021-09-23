@@ -21,7 +21,7 @@ import { T } from '@components/T';
 import { colors } from '@app/themes';
 import { itunesContainerCreators } from '../reducer';
 import { selectItunesContainer, selectTrackData, selectTrackError } from '../selectors';
-import { trackDetailsSaga } from '../saga';
+import itunesContainerSaga from '../saga';
 
 const { Meta } = Card;
 
@@ -81,9 +81,11 @@ export function TrackDetail({
 }) {
   const { trackId } = useParams();
   useEffect(() => {
-    dispatchClearTrackData();
     dispatchTrackData(trackId);
-  }, [trackId]);
+    return () => {
+      dispatchClearTrackData();
+    };
+  }, []);
   const trackCard = () => {
     return (
       <CustomCard
@@ -173,6 +175,10 @@ export function mapDispatchToProps(dispatch) {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(withConnect, memo, injectSaga({ key: 'itunesContainer', saga: trackDetailsSaga }))(TrackDetail);
+export default compose(
+  withConnect,
+  memo,
+  injectSaga({ key: 'itunesContainer', saga: itunesContainerSaga })
+)(TrackDetail);
 
 export const TrackDetailTest = compose(injectIntl)(TrackDetail);

@@ -69,7 +69,6 @@ describe('<TrackDetail />', () => {
       <TrackDetail trackDetails={trackDetails} dispatchTrackData={submitSpy} dispatchClearTrackData={submitSpyClear} />
     );
     await timeout(500);
-    expect(submitSpyClear).toBeCalled();
     expect(submitSpy).toBeCalled();
   });
   it('should render the trackDetails card image', () => {

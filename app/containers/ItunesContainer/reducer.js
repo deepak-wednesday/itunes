@@ -48,11 +48,12 @@ export const itunesContainerReducer = (state = initialState, action) =>
         draft.trackDetails = action.trackDetails;
         break;
       case itunesContainerTypes.FAILURE_GET_TRACK_DETAILS:
-        draft.trackDetails = {};
         draft.trackError = action.trackError;
         break;
       case itunesContainerTypes.CLEAR_TRACK_DETAILS:
-        return initialState;
+        draft.trackDetails = {};
+        draft.trackId = null;
+        break;
     }
   });
 
