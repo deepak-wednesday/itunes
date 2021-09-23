@@ -1,9 +1,8 @@
 name: Itunes App CD
 on:
-  push:
+  pull_request:
     branches:
       - master
-      - feat/ci
 
 jobs:
   build-and-deploy:
@@ -23,6 +22,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
 
+      - name: get branch name
+        shell: bash
+        run: echo ::set-output name=branch::${{github.event.pull_request.head.ref}}
+        id: branch
+
       - name: configuration of AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -34,8 +38,8 @@ jobs:
         run: yarn
 
       - name: Build
-        run: yarn build
+        run: export BRANCH_NAME=${{ steps.branch.outputs.branch }} && yarn build:uat
 
       - name: Deploy to s3
-        run: aws s3 sync ./build s3://itunes-app
+        run: aws s3 sync ./build s3://itunes-app/${{ steps.branch.outputs.branch }}
     
