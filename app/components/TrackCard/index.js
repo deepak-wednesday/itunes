@@ -31,6 +31,7 @@ const ImageCard = styled(Card)`
   width: 15em;
   height: ${(props) => (props.height ? props.height : 24)}em;
 `;
+
 const TextCard = styled(Meta)`
   && {
     margin: 0.3rem !important;
