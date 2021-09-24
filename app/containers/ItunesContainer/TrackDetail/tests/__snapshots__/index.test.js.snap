@@ -4,226 +4,248 @@ exports[`<TrackDetail /> should render and match the snapshot 1`] = `
 <body>
   <div>
     <div
-      class="TrackDetail__Container-sc-1rmz6ii-0 jxLkoL"
+      class="TrackDetail__Container-sc-1rmz6ii-0 gVdovQ"
     >
       <div
-        class="ant-card ant-card-bordered TrackDetail__CustomCard-sc-1rmz6ii-1 cavXle"
-        data-testid="track-details-card"
-        style="width: 300px;"
+        class="ant-row"
+        style="margin-left: -8px; margin-right: -8px;"
       >
         <div
-          class="ant-card-cover"
+          class="ant-col ant-col-xs-24 ant-col-md-14"
+          style="padding-left: 8px; padding-right: 8px;"
         >
-          <img
-            alt="example"
-            class="TrackDetail__StyledImage-sc-1rmz6ii-3 gByhtW"
-            data-testid="track-image"
-            src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/100x100bb.jpg"
-          />
+          <div
+            class="ant-card ant-card-bordered TrackDetail__CustomCard-sc-1rmz6ii-1 hfnWKx"
+            data-testid="track-details-card"
+          >
+            <div
+              class="ant-card-cover"
+            >
+              <img
+                alt="example"
+                class="TrackDetail__StyledImage-sc-1rmz6ii-2 bZMSUL"
+                data-testid="track-image"
+                src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/100x100bb.jpg"
+              />
+            </div>
+            <div
+              class="ant-card-body"
+            >
+              <div
+                class="ant-card-meta"
+              >
+                <div
+                  class="ant-card-meta-avatar"
+                >
+                  <span
+                    class="ant-avatar ant-avatar-circle ant-avatar-image"
+                  >
+                    <img
+                      src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
+                    />
+                  </span>
+                </div>
+                <div
+                  class="ant-card-meta-detail"
+                >
+                  <div
+                    class="ant-card-meta-title"
+                  >
+                    Upside Down
+                  </div>
+                  <div
+                    class="ant-card-meta-description"
+                  >
+                    Jack Johnson
+                  </div>
+                </div>
+              </div>
+              <button
+                class="ant-btn ant-btn-circle ant-btn-icon-only TrackDetail__CustomButtons-sc-1rmz6ii-3 fDkJvi"
+                type="button"
+              >
+                <span
+                  aria-label="play-circle"
+                  class="anticon anticon-play-circle TrackDetail__CustomPlay-sc-1rmz6ii-4 hjlukW"
+                  role="img"
+                >
+                  <svg
+                    aria-hidden="true"
+                    data-icon="play-circle"
+                    fill="currentColor"
+                    focusable="false"
+                    height="1em"
+                    viewBox="64 64 896 896"
+                    width="1em"
+                  >
+                    <path
+                      d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+                      fill="#1890ff"
+                    />
+                    <path
+                      d="M512 140c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372zm164.1 378.2L457.7 677.1a8.02 8.02 0 01-12.7-6.5V353a8 8 0 0112.7-6.5l218.4 158.8a7.9 7.9 0 010 12.9z"
+                      fill="#e6f7ff"
+                    />
+                    <path
+                      d="M676.1 505.3L457.7 346.5A8 8 0 00445 353v317.6a8.02 8.02 0 0012.7 6.5l218.4-158.9a7.9 7.9 0 000-12.9z"
+                      fill="#1890ff"
+                    />
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
         <div
-          class="ant-card-body"
+          class="ant-col ant-col-xs-24 ant-col-md-10"
+          style="padding-left: 8px; padding-right: 8px;"
         >
           <div
-            class="ant-card-meta"
+            class="ant-list ant-list-split ant-list-bordered"
           >
             <div
-              class="ant-card-meta-avatar"
-            >
-              <span
-                class="ant-avatar ant-avatar-circle ant-avatar-image"
-              >
-                <img
-                  src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
-                />
-              </span>
-            </div>
-            <div
-              class="ant-card-meta-detail"
+              class="ant-spin-nested-loading"
             >
               <div
-                class="ant-card-meta-title"
+                class="ant-spin-container"
               >
-                Upside Down
-              </div>
-              <div
-                class="ant-card-meta-description"
-              >
-                Jack Johnson
+                <li
+                  class="ant-list-item"
+                >
+                  <div
+                    class="ant-list-item-meta"
+                  >
+                    <div
+                      class="ant-list-item-meta-avatar"
+                    >
+                      <span
+                        class="ant-avatar ant-avatar-circle ant-avatar-image"
+                      >
+                        <img
+                          src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
+                        />
+                      </span>
+                    </div>
+                    <div
+                      class="ant-list-item-meta-content"
+                    >
+                      <h4
+                        class="ant-list-item-meta-title"
+                      >
+                        Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
+                      </h4>
+                      <div
+                        class="ant-list-item-meta-description"
+                      >
+                        Rock
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li
+                  class="ant-list-item"
+                >
+                  <div
+                    class="ant-list-item-meta"
+                  >
+                    <div
+                      class="ant-list-item-meta-avatar"
+                    >
+                      <span
+                        class="ant-avatar ant-avatar-circle ant-avatar-image"
+                      >
+                        <img
+                          src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
+                        />
+                      </span>
+                    </div>
+                    <div
+                      class="ant-list-item-meta-content"
+                    >
+                      <h4
+                        class="ant-list-item-meta-title"
+                      >
+                        Upside Down
+                      </h4>
+                      <div
+                        class="ant-list-item-meta-description"
+                      >
+                        Rock
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li
+                  class="ant-list-item"
+                >
+                  <div
+                    class="ant-list-item-meta"
+                  >
+                    <div
+                      class="ant-list-item-meta-avatar"
+                    >
+                      <span
+                        class="ant-avatar ant-avatar-circle ant-avatar-image"
+                      >
+                        <img
+                          src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
+                        />
+                      </span>
+                    </div>
+                    <div
+                      class="ant-list-item-meta-content"
+                    >
+                      <h4
+                        class="ant-list-item-meta-title"
+                      >
+                        Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
+                      </h4>
+                      <div
+                        class="ant-list-item-meta-description"
+                      >
+                        Rock
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li
+                  class="ant-list-item"
+                  data-testid="list-item"
+                >
+                  <div
+                    class="ant-list-item-meta"
+                  >
+                    <div
+                      class="ant-list-item-meta-avatar"
+                    >
+                      <span
+                        class="ant-avatar ant-avatar-circle ant-avatar-image"
+                      >
+                        <img
+                          src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
+                        />
+                      </span>
+                    </div>
+                    <div
+                      class="ant-list-item-meta-content"
+                    >
+                      <h4
+                        class="ant-list-item-meta-title"
+                      >
+                        Upside Down
+                      </h4>
+                      <div
+                        class="ant-list-item-meta-description"
+                      >
+                        1.29
+                      </div>
+                    </div>
+                  </div>
+                </li>
               </div>
             </div>
           </div>
-          <button
-            class="ant-btn ant-btn-circle ant-btn-icon-only TrackDetail__CustomButtons-sc-1rmz6ii-4 RUOfx"
-            type="button"
-          >
-            <span
-              aria-label="play-circle"
-              class="anticon anticon-play-circle TrackDetail__CustomPlay-sc-1rmz6ii-5 ggaNOj"
-              role="img"
-            >
-              <svg
-                aria-hidden="true"
-                data-icon="play-circle"
-                fill="currentColor"
-                focusable="false"
-                height="1em"
-                viewBox="64 64 896 896"
-                width="1em"
-              >
-                <path
-                  d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
-                  fill="#1890ff"
-                />
-                <path
-                  d="M512 140c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372zm164.1 378.2L457.7 677.1a8.02 8.02 0 01-12.7-6.5V353a8 8 0 0112.7-6.5l218.4 158.8a7.9 7.9 0 010 12.9z"
-                  fill="#e6f7ff"
-                />
-                <path
-                  d="M676.1 505.3L457.7 346.5A8 8 0 00445 353v317.6a8.02 8.02 0 0012.7 6.5l218.4-158.9a7.9 7.9 0 000-12.9z"
-                  fill="#1890ff"
-                />
-              </svg>
-            </span>
-          </button>
         </div>
-      </div>
-      <div
-        class="TrackDetail__ListContainer-sc-1rmz6ii-2 xVVgE"
-      >
-        <li
-          class="ant-list-item"
-        >
-          <div
-            class="ant-list-item-meta"
-          >
-            <div
-              class="ant-list-item-meta-avatar"
-            >
-              <span
-                class="ant-avatar ant-avatar-circle ant-avatar-image"
-              >
-                <img
-                  src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
-                />
-              </span>
-            </div>
-            <div
-              class="ant-list-item-meta-content"
-            >
-              <h4
-                class="ant-list-item-meta-title"
-              >
-                Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
-              </h4>
-              <div
-                class="ant-list-item-meta-description"
-              >
-                Rock
-              </div>
-            </div>
-          </div>
-        </li>
-        <li
-          class="ant-list-item"
-        >
-          <div
-            class="ant-list-item-meta"
-          >
-            <div
-              class="ant-list-item-meta-avatar"
-            >
-              <span
-                class="ant-avatar ant-avatar-circle ant-avatar-image"
-              >
-                <img
-                  src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
-                />
-              </span>
-            </div>
-            <div
-              class="ant-list-item-meta-content"
-            >
-              <h4
-                class="ant-list-item-meta-title"
-              >
-                Upside Down
-              </h4>
-              <div
-                class="ant-list-item-meta-description"
-              >
-                Rock
-              </div>
-            </div>
-          </div>
-        </li>
-        <li
-          class="ant-list-item"
-        >
-          <div
-            class="ant-list-item-meta"
-          >
-            <div
-              class="ant-list-item-meta-avatar"
-            >
-              <span
-                class="ant-avatar ant-avatar-circle ant-avatar-image"
-              >
-                <img
-                  src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
-                />
-              </span>
-            </div>
-            <div
-              class="ant-list-item-meta-content"
-            >
-              <h4
-                class="ant-list-item-meta-title"
-              >
-                Jack Johnson and Friends: Sing-A-Longs and Lullabies for the Film Curious George
-              </h4>
-              <div
-                class="ant-list-item-meta-description"
-              >
-                Rock
-              </div>
-            </div>
-          </div>
-        </li>
-        <li
-          class="ant-list-item"
-          data-testid="list-item"
-        >
-          <div
-            class="ant-list-item-meta"
-          >
-            <div
-              class="ant-list-item-meta-avatar"
-            >
-              <span
-                class="ant-avatar ant-avatar-circle ant-avatar-image"
-              >
-                <img
-                  src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ae/4c/d4/ae4cd42a-80a9-d950-16f5-36f01a9e1881/source/30x30bb.jpg"
-                />
-              </span>
-            </div>
-            <div
-              class="ant-list-item-meta-content"
-            >
-              <h4
-                class="ant-list-item-meta-title"
-              >
-                Upside Down
-              </h4>
-              <div
-                class="ant-list-item-meta-description"
-              >
-                1.29
-              </div>
-            </div>
-          </div>
-        </li>
       </div>
     </div>
   </div>

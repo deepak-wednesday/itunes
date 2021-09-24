@@ -1,33 +1,14 @@
-import { css } from 'styled-components';
-const ScreenSizes = {
+import { generateMedia } from 'styled-media-query';
+
+const screenSizes = {
   DESKTOP: 992,
   TABLET: 768,
   PHONE: 320
 };
-const sizes = {
-  desktop: ScreenSizes.DESKTOP,
-  tablet: ScreenSizes.TABLET,
-  mobile: ScreenSizes.PHONE
-};
-// iterate through sizes and create a media template
-export default Object.keys(sizes).reduce((acc, label) => {
-  acc[label] = {
-    min: (args) =>
-      css`
-        @media (min-width: ${sizes[label] / 16}em) {
-          ${css([args])};
-        }
-      `
-        .join('')
-        .replace(' ', ''),
-    max: (args) =>
-      css`
-        @media (max-width: ${sizes[label] / 16}em) {
-          ${css([args])};
-        }
-      `
-        .join('')
-        .replace(' ', '')
-  };
-  return acc;
-}, {});
+
+const media = generateMedia({
+  desktop: `${screenSizes.DESKTOP / 16}em`,
+  tablet: `${screenSizes.TABLET / 16}em`,
+  phone: `${screenSizes.PHONE / 16}em`
+});
+export default media;
