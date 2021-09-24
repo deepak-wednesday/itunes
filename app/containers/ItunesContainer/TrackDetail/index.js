@@ -14,11 +14,12 @@ import { isEmpty } from 'lodash';
 import { compose } from 'redux';
 import { injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
-import { Skeleton, Card, Avatar, Button, List } from 'antd';
+import { Skeleton, Card, Avatar, Button, List, Row, Col } from 'antd';
 import { PlayCircleTwoTone } from '@ant-design/icons';
 import If from '@components/If';
 import { T } from '@components/T';
 import { colors } from '@app/themes';
+import media from '@app/themes/media';
 import { itunesContainerCreators } from '../reducer';
 import { selectItunesContainer, selectTrackData, selectTrackError } from '../selectors';
 import itunesContainerSaga from '../saga';
@@ -28,7 +29,7 @@ const { Meta } = Card;
 const Container = styled.div`
   && {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     max-width: ${(props) => props.maxwidth}px;
     padding: ${(props) => props.padding}px;
     width: 100%;
@@ -38,20 +39,16 @@ const Container = styled.div`
 const CustomCard = styled(Card)`
   && {
     padding: 20px;
-    margin: 0 200px;
-    width: 100%;
+    margin: auto;
+    width: 300px;
     border-radius: 10px;
     border: 5px solid ${colors.listcolor};
     height: 410px;
-  }
-`;
-const ListContainer = styled.div`
-  && {
-    border-radius: 10px;
-    border: 5px solid ${colors.listcolor};
-    width: 30%;
-    padding: 1.5em;
-    height: inherit;
+    ${media.lessThan('phone')`
+    padding: 5px;
+    margin: 0 10px;
+    width: 50px
+    `}
   }
 `;
 const StyledImage = styled.img`
@@ -90,7 +87,6 @@ export function TrackDetail({
     return (
       <CustomCard
         data-testid="track-details-card"
-        style={{ width: 300 }}
         cover={<StyledImage data-testid="track-image" alt="example" src={trackDetails.artworkUrl100} />}
       >
         <Meta
@@ -104,7 +100,7 @@ export function TrackDetail({
   };
   const listCard = () => {
     return (
-      <ListContainer>
+      <>
         <List.Item>
           <List.Item.Meta
             avatar={<Avatar src={trackDetails.artworkUrl30} />}
@@ -133,7 +129,7 @@ export function TrackDetail({
             description={trackDetails.trackPrice}
           />
         </List.Item>
-      </ListContainer>
+      </>
     );
   };
 
@@ -141,8 +137,16 @@ export function TrackDetail({
     <Container maxwidth={maxwidth} padding={padding}>
       <If condition={isEmpty(trackError)} otherwise={<T id="something_went_wrong" />}>
         <Skeleton loading={isEmpty(trackDetails)} active>
-          {trackCard()}
-          {listCard()}
+          <Row gutter={16}>
+            <Col xs={24} md={14}>
+              {trackCard()}
+            </Col>
+            <Col xs={24} md={10}>
+              <List itemLayout="horizontal" bordered={true}>
+                {listCard()}
+              </List>
+            </Col>
+          </Row>
         </Skeleton>
       </If>
     </Container>
